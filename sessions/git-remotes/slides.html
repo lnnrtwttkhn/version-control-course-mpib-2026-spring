@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<link href="../../images/git-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
+
+  <title>Track, organize and share your work: An introduction to Git for research – Session 6: Integration with GitHub / GitLab</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-1b7d2c2bd1ee676b5edff01ca2218772.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Session 6: Integration with GitHub / GitLab</h1>
+  <p class="subtitle"><strong>Track, organize and share your work: An introduction to Git for research</strong><br>
+Course at Max Planck Institute for Human Development<br>
+<a href="https://lennartwittkuhn.com/version-control-course-mpib-2026-spring/"><i class="fa-solid fa-display" aria-label="display"></i> Slides</a> | <a href="https://github.com/lnnrtwttkhn/repro-couse"><i class="fa-brands fa-github" aria-label="github"></i> Source</a><br>
+<a href="https://creativecommons.org/licenses/by/4.0/"><img data-src="https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg" alt="License: CC BY 4.0"></a> <a href="https://doi.org/10.25592/uhhfdm.14149"><img data-src="https://www.fdr.uni-hamburg.de/badge/DOI/10.25592/uhhfdm.14149.svg" alt="DOI"></a></p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+<a href="https://lennartwittkuhn.com/">Dr.&nbsp;Lennart Wittkuhn</a> <a href="https://orcid.org/0000-0003-2966-6888" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:lennart.wittkuhn@tutanota.com">lennart.wittkuhn@tutanota.com</a>
+</div>
+</div>
+</div>
+
+  <p class="date">14:00</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Agenda</h2>
+<ul>
+<li><a href="#/last-session-first-steps-with-git-git-essentials" id="/toc-last-session-first-steps-with-git-git-essentials"><span class="header-section-number">1</span> Last session: First steps with Git &amp; Git Essentials</a></li>
+<li><a href="#/this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d" id="/toc-this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d"><span class="header-section-number">2</span> This session: Integration with GitHub / GitLab</a></li>
+<li><a href="#/appendix" id="/toc-appendix"><span class="header-section-number">3</span> Appendix</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="last-session-first-steps-with-git-git-essentials" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Last session: First steps with Git &amp; Git Essentials</h1>
+
+</section>
+<section id="last-session-first-steps-with-git-git-essentials-1" class="slide level2">
+<h2>Last session: First steps with Git &amp; Git Essentials</h2>
+<p>After the last session, you should now be able to answer the following questions / do the following:</p>
+<p><span class="emoji" data-emoji="bulb">💡</span> You can initialize a Git repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You can check the status of a Git repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You understand the difference between the staging area and a commit.<br> <span class="emoji" data-emoji="bulb">💡</span> You can stage and commit changes.<br> <span class="emoji" data-emoji="bulb">💡</span> You understand the difference between a commit message and a description.</p>
+<p><span class="emoji" data-emoji="bulb">💡</span> You know what good commits look like.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to explore the commit history.<br> <span class="emoji" data-emoji="bulb">💡</span> You can compare different commits.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to use and create a <code>.gitignore</code> file.<br> <span class="emoji" data-emoji="bulb">💡</span> You can discuss which files can (not) be tracked well with Git and why.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to track empty folders in Git repositories.</p>
+</section>
+<section id="last-session-cheatsheet" class="slide level2">
+<h2>Last session: Cheatsheet</h2>
+<h3 id="first-steps-with-git">First steps with Git</h3>
+<div id="f9f53135" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
+<table class="caption-top">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>git init</code></td>
+<td style="text-align: left;">Initializes a folder as a Git repository</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git status</code></td>
+<td style="text-align: left;">Shows Git tracking status of files in the repository</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git add</code></td>
+<td style="text-align: left;">Adds file(s) to the staging area</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git commit</code></td>
+<td style="text-align: left;">Commits staged files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git commit -m "commit message"</code></td>
+<td style="text-align: left;">Commits staged files with a commit message</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="last-session-cheatsheet-1" class="slide level2">
+<h2>Last session: Cheatsheet</h2>
+<h3 id="git-essentials">Git essentials</h3>
+<div id="0728bb6d" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<table class="caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>git log</code></td>
+<td style="text-align: left;">Views past commits</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git diff</code></td>
+<td style="text-align: left;">Views made changes compared to the last commit</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git mv</code></td>
+<td style="text-align: left;">Renames or moves files and automatically stages the changes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="last-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220636f757273652e70726f6a656374203e7d7d-project" class="slide level2 scrollable">
+<h2>Last session: <code>recipes</code> project</h2>
+<h3 id="first-steps-with-git-1">First steps with Git</h3>
+<p>At the end of this session, you should have accomplished the following:</p>
+<ol type="1">
+<li>You set up Git.</li>
+<li>You initialized your <code>recipes</code> folder as a Git repository.</li>
+<li>You committed your first file to the <code>recipes</code> repository.</li>
+</ol>
+<p>Please keep the <code>recipes</code> folder! We will continue to use it in the following sessions.</p>
+<h3 id="git-essentials-1">Git Essentials</h3>
+<p>At the end of this session, you should have accomplished the following:</p>
+<ol type="1">
+<li>Commit at least three changes in <code>recipes.txt</code>.</li>
+<li>Make at least one commit using <code>git commit --amend</code>.
+<ul>
+<li>For example, add a a new entry without a title first, commit, then add a title and use <code>git commit --amend</code> to add the title change to the same commit.</li>
+</ul></li>
+<li>Create a <code>.gitignore</code> file.
+<ul>
+<li>Everyone: Create a random file that you want to ignore, for example <code>image.jpg</code>.</li>
+<li>All macOS users: Let your repository ignore <code>.DS_Store</code>.</li>
+</ul></li>
+<li><span class="emoji" data-emoji="rocket">🚀</span> Optional: Commit <code>.gitkeep</code> in an otherwise empty directory.</li>
+</ol>
+<p>Please keep the <code>recipes</code> folder! We will continue to use it in the following sessions.</p>
+</section>
+<section id="common-questions-from-last-session" class="slide level2">
+<h2>Common questions from last session</h2>
+<div class="fragment">
+<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d7175657374696f6e203e7d7d-how-can-i-make-changes-in-a-text-.txt-file"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> <em>“How can I make changes in a text (<code>.txt</code>) file?”</em></h4>
+<ul>
+<li>Remember: <strong>It’s just a regular text file on your computer.</strong></li>
+<li>Option 1: Use a regular text editor (e.g., TextEdit on macOS, Notepad++ on Windows, or others).</li>
+<li>Option 2: Use <code>vim</code> directly from the command line (see chapter / session on “Setup”).</li>
+<li>Option 3: Use command line commands like <code>echo "My text" &gt;&gt; recipes.txt</code>.</li>
+</ul>
+</div>
+<div class="fragment">
+<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d7175657374696f6e203e7d7d-i-ran-git-commit-but-nothing-happened"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> <em>“I ran <code>git commit</code> but nothing happened?”</em></h4>
+<ul>
+<li>Maybe you forgot to run <code>git add</code> before?</li>
+</ul>
+</div>
+<div class="fragment">
+<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d6578636c616d6174696f6e203e7d7d-remember-to-cd-into-your-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220636f757273652e70726f6a656374203e7d7d-project-folder"><i class="fa-solid fa-circle-exclamation" aria-label="circle-exclamation"></i> <em>“Remember to <code>cd</code> into your <code>recipes</code> project folder!”</em></h4>
+<ul>
+<li>Every time you open the command line, it starts at a default location (likely your home directory).</li>
+<li>Check in which folder you are, using <code>pwd</code> (“print working directory”).</li>
+<li>Use <code>cd</code> to move to your <code>recipes</code> project folder before you start running the Git commands.</li>
+</ul>
+</div>
+</section>
+<section id="important-note-git-repository-in-user-folder" class="slide level2">
+<h2>Important note: Git repository in <code>/user</code> folder?</h2>
+<div class="fragment">
+<ul>
+<li>Please make sure that your <code>recipes</code> folder is in a suitable place (for example, in the <code>Desktop</code>, <code>Documents</code> folders or where you keep your course-related files, …) and <strong>not</strong> in your user directory!</li>
+<li>You can check your current working directory by running <code>pwd</code> in your <code>recipes</code> folder.</li>
+<li>Also: Always remember to <code>cd</code> into your repository before you execute Git commands!</li>
+<li>If your <code>recipes</code> folder is in your user directory, please <strong>tell us</strong> and we can fix it.</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Tip:</strong> To prevent ever creating a Git repository inside your <code>user</code> folder, you can use:</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><code>{zsh filename="Code"} touch ~/.git</code></p>
+</div></div>
+</div>
+<div class="fragment">
+<p>Running <code>git init</code> in the <code>user</code> directory now results in a (desired) error:</p>
+<div class="column" style="width:40%;">
+<p><code>{zsh filename="Output"} fatal: invalid gitfile format: /Users/user/.git</code></p>
+</div><p>Thanks to <a href="https://social.coop/@eamon/112434377857903339">Eamon Caddigan</a> for the idea!</p>
+</div>
+</section>
+<section id="staging-and-committing" class="slide level2">
+<h2>Staging and Committing</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="staging">Staging:</h3>
+<ul>
+<li>Command: <code>git add</code></li>
+<li>Purpose: Preparing and organizing files before they are recorded in the repository’s history.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="committing">Committing:</h3>
+<ul>
+<li>Command: <code>git commit -m "commit message"</code></li>
+<li>Purpose: Saving the changes in the staged files to the repository’s history, creating a snapshot.</li>
+</ul>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/git-staging-diagram.png" style="width:100.0%"></p>
+<figcaption>Source: <a href="https://git-scm.com/book/en/v2">git-scm.com</a></figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/git-analogy-letter.png" style="width:100.0%"></p>
+<figcaption>Source: <a href="https://docs.google.com/presentation/d/1Yj59XAAJZQprO-kfDHzHMtjJDttMFAqkkslqcSIRZKg/edit#slide=id.p">Heidi Seibold</a></figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> This session: Integration with GitHub / GitLab</h1>
+
+</section>
+<section id="this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d-1" class="slide level2">
+<h2>This session: Integration with GitHub / GitLab</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../../images/git-github-integration.png" style="width:70.0%"></p>
+<figcaption>Image from <a href="https://medium.com/analytics-vidhya/version-control-using-git-github-ff4c3f7c752e">Techdobz</a></figcaption>
+</figure>
+</div>
+</section>
+<section id="this-session-collaboration-via-git-and-github" class="slide level2">
+<h2>This session: Collaboration via Git and GitHub</h2>
+<p><img data-src="../../images/pull-request-example-zi-mannheim.png" style="width:80.0%"></p>
+<p><a href="https://github.com/lnnrtwttkhn/version-control-course-zi-mannheim-2025/pull/7">Link to Pull Request</a></p>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<p><span class="emoji" data-emoji="bulb">💡</span> You can create a remote repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You can connect your local Git repository to a remote repository service like GitHub or GitLab.<br> <span class="emoji" data-emoji="bulb">💡</span> You can pull and push changes to and from a remote repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You can clone a repository from a remote repository.</p>
+</section>
+<section id="reading" class="slide level2">
+<h2>Reading</h2>
+<p><i class="fa-solid fa-display" aria-label="display"></i> <a href="https://lennartwittkuhn.com/version-control-book/chapters/remotes-intro.html">“Remotes - Introduction”</a></p>
+<iframe width="100%" height="80%" src="https://lennartwittkuhn.com/version-control-book/chapters/remotes-intro.html"></iframe>
+</section>
+<section id="tasks" class="slide level2 scrollable">
+<h2>Tasks</h2>
+<p>In this session, you will work on the following tasks:</p>
+<ol type="1">
+<li><i class="fa-solid fa-book-open" aria-label="book-open"></i> <strong>Reading</strong>: Read the chapter(s) <a href="https://lennartwittkuhn.com/version-control-book/chapters/remotes-intro.html">“Remotes - Introduction”</a> in the Version Control Book.</li>
+<li><i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> <strong>Implementation</strong>: Try out the commands in the chapter.</li>
+<li><i class="fa-solid fa-list-check" aria-label="list-check"></i> <strong>Exercises</strong>: Work on the <a href="#/exercises">exercises</a> for the <a href="#/recipes-project"><code>recipes</code> project</a>.</li>
+</ol>
+<p>As always:</p>
+<ol type="1">
+<li>Try out the commands of this session and play around with them.</li>
+<li>Check whether you have achieved the <a href="#/learning-objectives">learning objectives</a>.</li>
+<li>Ask questions!</li>
+<li>Let’s <em>git</em> started!</li>
+</ol>
+</section>
+<section id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220636f757273652e70726f6a656374203e7d7d-project" class="slide level2 scrollable">
+<h2><code>recipes</code> project</h2>
+<p>At the end of this session, you should have accomplished the following:</p>
+<ol type="1">
+<li>You created a GitHub account.</li>
+<li>You connected your GitHub account to your local Git using SSH.</li>
+<li>You created a new <em>private(!)</em> GitHub repository.</li>
+<li>You uploaded (i.e., “pushed”) the default branch of your <code>recipes</code> repository to GitHub.</li>
+</ol>
+<p><strong>Collaboration Option 1/2 (Basic / Advanced):</strong></p>
+<ol type="1">
+<li>You invited a partner from the course as a collaborator to your <code>recipes</code> on GitHub.</li>
+<li>You collaborated on a shared project by adding and committing changes to your partner’s repository.</li>
+</ol>
+<p><strong>Collaboration Option 3 (Alternative):</strong></p>
+<ol type="1">
+<li>You clone your own repository to a different location on your computer.</li>
+<li>Stage and commit changes in the repository in this new location.</li>
+<li>Push the changes to GitHub and pull them in the original repository location on your computer.</li>
+</ol>
+<h3 id="optional">Optional:</h3>
+<ol type="1">
+<li>You created a short <code>README.md</code> file in your repository.</li>
+</ol>
+<p>Please keep the <code>recipes</code> folder! We will continue to use it in the following sessions.</p>
+</section>
+<section id="cheatsheet" class="slide level2">
+<h2>Cheatsheet</h2>
+<div id="d57e2401" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
+<table class="caption-top">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>git remote</code></td>
+<td style="text-align: left;">Manages remote repositories</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git clone</code></td>
+<td style="text-align: left;">Creates a local copy of a repository</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git pull</code></td>
+<td style="text-align: left;">Fetches and merges the latest changes from a remote repository into the current branch</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git fetch</code></td>
+<td style="text-align: left;">Updates remote tracking branches</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git push</code></td>
+<td style="text-align: left;">Uploads local commits to a remote repository</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="exercises-1" class="slide level2 scrollable">
+<h2>Exercises (1)</h2>
+<p><strong>Mandatory for everyone!</strong></p>
+<div class="fragment">
+<h3 id="connect-to-remote-repositories-using-ssh">Connect to remote repositories using SSH</h3>
+<ol type="1">
+<li>Generate an SSH key.</li>
+<li>Copy the SSH key to your clipboard.</li>
+<li>Add the SSH key to the remote repository (for example, GitHub or GitLab).</li>
+</ol>
+</div>
+<div class="fragment">
+<h3 id="upload-your-local-repository-to-a-remote-repository">Upload your local repository to a remote repository</h3>
+<ol type="1">
+<li>Create an empty repository on the remote repository hosting platform, for example GitHub or GitLab. Make sure to not initialize the repository with any files!</li>
+<li>If needed, navigate to your project repository using the command line.</li>
+<li>Set the remote URL of your local repository to your remote repository.</li>
+<li>Push the changes on your default branch (<code>main</code> or <code>master</code>) to your remote repository.</li>
+</ol>
+</div>
+</section>
+<section id="exercises-2" class="slide level2 scrollable">
+<h2>Exercises (2)</h2>
+<p><strong>Collaboration Option 1 (Basic)</strong></p>
+<div class="fragment">
+<h3 id="private-collaboration-on-default-branch-main-or-master">Private collaboration on default branch (<code>main</code> or <code>master</code>)</h3>
+<ol type="1">
+<li>Add your exercise partner as a collaborator to your project repository on GitHub.</li>
+<li>Clone your partner’s repository.</li>
+<li>Add a new change to your collaborator’s project file (if you are unsure, where to add the entry, ask your collaborator!)</li>
+<li>Add and commit the changes.</li>
+<li>Push the changes to the remote repository.</li>
+<li>Pull your partner’s changes into your repository.</li>
+</ol>
+</div>
+</section>
+<section id="exercises-3" class="slide level2 scrollable">
+<h2>Exercises (3)</h2>
+<p><strong>Collaboration Option 2 (Advanced)</strong></p>
+<div class="fragment">
+<h3 id="private-collaboration-with-pull-requests-using-github-flow">Private collaboration with pull requests (using GitHub Flow)</h3>
+<ol type="1">
+<li>Add your exercise partner as a collaborator to your project repository on GitHub.</li>
+<li>Clone your partner’s repository.</li>
+<li>Create a new branch in your collaborator’s repository.</li>
+<li>Add a new entry to your collaborator’s project file (e.g., <code>.txt</code> or <code>.qmd</code> (if you are unsure, where to add the entry, ask your collaborator!)</li>
+<li>Add and commit the changes.</li>
+<li>Push the changes on the new branch to the remote repository.</li>
+<li>Create a Pull Request (on GitLab: Merge Request).</li>
+<li>Review the Pull Request that your collaborator made in your repository.</li>
+<li><span class="emoji" data-emoji="rocket">🚀</span> Optional: Add additional changes on the branch pushed by your collaborator.</li>
+<li>Merge the pull request into your repository.</li>
+</ol>
+</div>
+</section>
+<section id="exercises-4" class="slide level2 scrollable">
+<h2>Exercises (4)</h2>
+<p><strong>Collaboration Option 3 (Alternative)</strong></p>
+<div class="fragment">
+<h3 id="clone-and-sync-your-repository">Clone and sync your repository</h3>
+<ol type="1">
+<li>Move to a location on your computer where you want to clone a repository.</li>
+<li>Clone your remote repository to a <em>different location</em> on your computer.</li>
+<li>Stage and commit changes in the new location (consider using a new branch).</li>
+<li>Push these new changes to GitHub.</li>
+<li>Pull the changes to the repository in the original location.</li>
+<li>Delete your newly cloned repository.</li>
+</ol>
+</div>
+</section>
+<section id="bonus-exercises" class="slide level2 scrollable">
+<h2><span class="emoji" data-emoji="rocket">🚀</span> Bonus exercises</h2>
+<div class="fragment">
+<h3 id="add-a-readme.md">Add a <code>README.md</code></h3>
+<ol type="1">
+<li>Find the option to create a new file on your remote repository in the browser.</li>
+<li>Name the file <code>README.md</code>, add a brief description, and provide a commit message.</li>
+<li><span class="emoji" data-emoji="rocket">🚀</span> Optional: Play around with <a href="https://www.markdownguide.org/">Markdown</a> syntax.</li>
+<li>Save the <code>README.md</code> file to the repository.</li>
+<li>Pull the changes to your local repository.</li>
+</ol>
+</div>
+</section>
+<section id="solutions" class="slide level2">
+<h2>Solutions</h2>
+<h3 id="connect-to-remote-repositories-using-ssh-1">Connect to remote repositories using SSH</h3>
+<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-ssh.sh</code> 1. In the command line, create a new SSH key. Make sure to change the example email to your email address. Optionally, provide a passphrase. 1. Copy the SSH key to your clipboard. Here, we use <code>cat</code> to print the contents of the SSH key to the command line. Copy the contents displayed in the Terminal to your clipboard. 1. Add the SSH key to your remote repository account.</p>
+</section>
+<section id="solutions-1" class="slide level2">
+<h2>Solutions</h2>
+<h3 id="upload-your-local-repository-to-a-remote-repository-1">Upload your local repository to a remote repository</h3>
+<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-push.sh</code> 1. To create an empty repository on GitHub: (1) Go to GitHub and click the <code>+</code> icon in the upper-right corner, then select <code>New repository</code>. (2) Name your repository. (3) Do not select <code>Initialize this repository with a README</code>. (4) Click <code>Create repository</code>. 1. Optional: Navigate into the project repository using <code>cd</code> (or a similar path). 1. Set the remote URL of the local repository to the repository using <code>git remote add origin &lt;URL&gt;</code>. Remember to use the correct <code>&lt;URL&gt;</code> depending on whether you authentication method (typically SSH or PAT). 1. Push the changes on the default branch (here, <code>main</code>) to the remote repository using <code>git push -u origin main</code>.</p>
+</section>
+<section id="solutions-2" class="slide level2">
+<h2>Solutions</h2>
+<h3 id="private-collaboration-with-pull-requests-using-github-flow-1">“Private” collaboration with pull requests (using GitHub Flow)</h3>
+<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-collaboration.sh</code> 1. Add your exercise partner as a collaborator to your <code>recipes</code> repository: (1) Go to your repository on GitHub. (2) Click on <code>Settings</code>. (2) Click on <code>Manage access</code> in the left sidebar. (3) Click <code>Invite a collaborator</code> and enter your partner’s GitHub username. 1. Move to the location on your computer where you would like to clone your partner’s repository into, using <code>cd</code> in the command line. Here, we <code>cd</code> into the user’s home directory (<code>~</code>). 1. Clone your partner’s repository using <code>git clone</code>. Make sure that you <em>not</em> cloning into an existing repository. 1. Create a new branch in your partner’s repository. 1. Add a recipe to your partner’s <code>recipes.txt</code> file. 1. Add and commit the changes using a descriptive commit message. 1. Push the changes on the new branch to GitHub. 1. Create a Pull Request: (1) Go to your partner’s repository on GitHub. (2) Click <code>Compare &amp; pull request</code> for your branch. (3) Provide a title and description, then click <code>Create pull request</code>. 1. Review the PR your partner made in your repository: (19) Go to your repository on GitHub. (2) Click on the <code>Pull requests</code> tab. (3) Click on the PR made by your partner. (4) Review the changes and provide feedback. 1. Merge the PR into your repository: (1) After reviewing, click the green <code>Merge pull request</code> button. (2) Click <code>Confirm merge</code>.</p>
+</section>
+<section id="solutions-3" class="slide level2 scrollable">
+<h2>Solutions</h2>
+<h3 id="add-a-readme.md-1">Add a <code>README.md</code></h3>
+<ol type="1">
+<li>In your browser, go to your remote repository (for example, on GitHub), click <code>Add file</code>, and select <code>Create new file</code>.</li>
+<li>Name the file <code>README.md</code>. Add a brief description of your project. Provide a descriptive commit message at the bottom.</li>
+<li>Play around with <a href="https://www.markdownguide.org/">Markdown</a> syntax</li>
+<li>Click the green <code>Commit new file</code> button to save the <code>README.md</code> file to the repository.</li>
+<li>Use <code>git pull origin main</code> to pull the changes to your local repository.</li>
+</ol>
+</section>
+<section id="solutions-4" class="slide level2">
+<h2>Solutions</h2>
+<h3 id="clone-and-sync-your-repository-1">Clone and sync your repository</h3>
+<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-clone.sh</code> 1. Move to the location on your computer where you would like to clone your own repository into, using <code>cd</code> in the command line. 1. Clone your repository from GitHub to a different location on your computer. 1. Stage and commit changes in the new location (consider using a new branch). 1. Push the new changes to GitHub. 1. Fetch these new changes to the repository in the original location. 1. Delete your newly cloned repository.</p>
+</section></section>
+<section>
+<section id="appendix" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Appendix</h1>
+
+</section>
+<section id="cloning" class="slide level2">
+<h2>Cloning</h2>
+<div class="fragment">
+<h4 id="cloning-1">Cloning</h4>
+<ul>
+<li>Remember to clone a repo in a sensible location (not in your own repository)</li>
+<li>To rename the cloned repo you can use: <code>git clone &lt;URL&gt; new-folder-name</code></li>
+</ul>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Version Control Course</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'fast',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/lennartwittkuhn\.com\/version-control-course-mpib-2026-spring\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
