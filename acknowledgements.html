@@ -101,6 +101,14 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"><i class="fa-solid fa-clipboard-list" aria-label="clipboard-list"></i> Schedule</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./sessions/index.html"> 
+<span class="menu-text"><i class="fa-solid fa-list-ol" aria-label="list-ol"></i> Sessions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exercises.html"> 
+<span class="menu-text"><i class="fa-solid fa-table-list" aria-label="table-list"></i> Exercises</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./code-of-conduct.html"> 
 <span class="menu-text"><i class="fa-solid fa-handshake" aria-label="handshake"></i> Code of Conduct</span></a>
   </li>  
@@ -186,7 +194,58 @@ ul.task-list li input[type="checkbox"] {
 <summary>
 Click here to view the full <code>Makefile</code> of this project.
 </summary>
-<code>{bash, filename="Makefile"} #| eval: false #| file: Makefile #| code-line-numbers: true</code>
+<div id="a7d563bd" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>IMAGES_URL=https://nx81903.your-storageshare.de/s/Z5tGfNx4caHZc4K/download
+IMAGES_ARCHIVE=version-control-course.zip
+IMAGES_DIR=images/
+CHEATSHEET_URL=https://raw.githubusercontent.com/lnnrtwttkhn/version-control-book/main/cheatsheet.json
+DOCKER_IMAGE=lnnrtwttkhn/version-control-course
+
+.PHONY: all
+all: render
+
+.PHONY: docker-build
+docker-build:
+    docker build -t $(DOCKER_IMAGE):latest .
+
+.PHONY: docker-run
+docker-run:
+    docker run --rm -it -v "$(PWD)":/project -p 9999:9999 $(DOCKER_IMAGE):latest
+
+.PHONY: setup
+setup:
+    uv sync
+
+.PHONY: preview
+preview:
+    uv run quarto preview
+
+.PHONY: render
+render: clean objectives objectives-datalad exercises cheatsheet images
+    uv run quarto render
+
+.PHONY: deploy
+deploy: clean images objectives objectives-datalad exercises
+    uv run quarto publish gh-pages
+
+.PHONY: images
+images:
+    curl -L $(IMAGES_URL) -o $(IMAGES_ARCHIVE)
+    unzip -j -o $(IMAGES_ARCHIVE) -d $(IMAGES_DIR)
+    rm -f $(IMAGES_ARCHIVE) 
+
+.PHONY: cheatsheet
+cheatsheet:
+    rm -rf cheatsheet.json
+    curl -O $(CHEATSHEET_URL)
+
+.PHONY: clean
+clean:
+    rm -rf _site $(IMAGES_DIR)*
+</code></pre>
+</div>
+</div>
 </details>
 <p>The illustration on the <a href="./index.html" target="_self">homepage</a> is an illustration created by <a href="https://www.scriberia.com/">Scriberia</a> with <a href="https://the-turing-way.netlify.app/welcome">The Turing Way community</a>. It is used under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0 licence</a>. DOI: <a href="https://doi.org/10.5281/zenodo.3695300">10.5281/zenodo.3332807</a>.</p>
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basics of the Command Line – Track, organize and share your work: An introduction to Git for research</title>
+<title>Solutions – Track, organize and share your work: An introduction to Git for research</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -100,6 +135,14 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"><i class="fa-solid fa-clipboard-list" aria-label="clipboard-list"></i> Schedule</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../sessions/index.html"> 
+<span class="menu-text"><i class="fa-solid fa-list-ol" aria-label="list-ol"></i> Sessions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises.html"> 
+<span class="menu-text"><i class="fa-solid fa-table-list" aria-label="table-list"></i> Exercises</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../code-of-conduct.html"> 
 <span class="menu-text"><i class="fa-solid fa-handshake" aria-label="handshake"></i> Code of Conduct</span></a>
   </li>  
@@ -148,7 +191,6 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet">Cheatsheet</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a></li>
   </ul>
 </nav>
     </div>
@@ -163,8 +205,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="entity-contents">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Basics of the Command Line</h1>
-<p class="subtitle lead">Session 02</p>
+<h1 class="title">Solutions</h1>
+<p class="subtitle lead">Session 2</p>
 </div>
 <div class="quarto-title-meta column-page-left">
     <div>
@@ -194,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="this-session">This session</h2>
 <p>In this session, you will work on the following tasks:</p>
 <ol type="1">
-<li><i class="fa-solid fa-book-open" aria-label="book-open"></i> <strong>Reading</strong>: Read the chapter(s) <a href="https://lennartwittkuhn.com/version-control-book/chapters/command-line.html">Command Line</a> in the Version Control Book.</li>
+<li><i class="fa-solid fa-book-open" aria-label="book-open"></i> <strong>Reading</strong>: Read the chapter(s) <strong>?meta:chapter</strong> in the Version Control Book.</li>
 <li><i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> <strong>Implementation</strong>: Try out the commands in the chapter.</li>
 <li><i class="fa-solid fa-list-check" aria-label="list-check"></i> <strong>Exercises</strong>: Work on the <a href="#exercises">exercises</a> for the <a href="#recipes-project"><code>recipes</code> project</a>.</li>
 </ol>
@@ -233,10 +275,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="create-files-and-folders" class="level3">
 <h3 data-anchor-id="create-files-and-folders">Create files and folders</h3>
 <ol start="3" type="1">
-<li>Within your chosen folder, create a new subfolder and give it a relevant name.</li>
-<li>Navigate into the newly created subfolder.</li>
-<li>Create a new text file and name it appropriately.</li>
-<li>Confirm that the files was created by listing the contents of the folder.</li>
+<li>Within your chosen folder, create a new subfolder called <code>recipes</code>.</li>
+<li>Navigate into the <code>recipes</code> folder.</li>
+<li>Create a new text file called <code>recipes.txt</code>.</li>
+<li>Confirm that the file was created by listing the contents of the folder.</li>
+<li>Add the title “My Favorite Recipes” to <code>recipes.txt</code>. Which command or method did you use?</li>
 </ol>
 </section>
 </section>
@@ -244,7 +287,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="bonus-exercises"><span class="emoji" data-emoji="rocket">🚀</span> Bonus exercises</h2>
 <section id="writing-and-opening-files" class="level3">
 <h3 data-anchor-id="writing-and-opening-files">Writing and opening files</h3>
-<p>Add the title “My Favorite Recipes” to <code>recipes.txt</code>. Which command or method did you use?</p>
+<p>Add a first recipe to <code>recipes.txt</code>. Include at least a title and a short list of ingredients. Which command or method did you use?</p>
 </section>
 <section id="creating-multiple-files" class="level3">
 <h3 data-anchor-id="creating-multiple-files">Creating multiple files</h3>
@@ -285,8 +328,6 @@ ul.task-list li input[type="checkbox"] {
 <li>Click <strong>Save</strong>.</li>
 </ol>
 <p>Note: This feature has been confirmed to work in <a href="https://google.com/chrome">Google Chrome</a>, <a href="https://www.chromium.org/Home">Chromium</a> as well as in <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>.</p>
-<p>Here’s what the Chrome print dialog would look like with these settings enabled:</p>
-<p><img src="../images/print-to-pdf.png" class="border img-fluid" alt="Screenshot of Chrome print dialog with the first slide/page of 43 shown on the left, and print options on the right. The Destination print option has Save as PDF selected."></p>
 <p>These instructions were copied from the <a href="https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf">Quarto documentation</a> (<a href="https://opensource.org/license/mit/">MIT License</a>) and slightly modified.</p>
 </div>
 </div>
@@ -294,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="cheatsheet" class="level2">
 <h2 data-anchor-id="cheatsheet">Cheatsheet</h2>
-<div id="45e04670" class="cell" data-execution_count="1">
+<div id="ecdeb4c5" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -424,9 +465,6 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-</section>
-<section id="solutions" class="level2">
-<h2 data-anchor-id="solutions">Solutions</h2>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Solution: Navigation and setup">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -441,7 +479,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container callout-body">
 <p>For folder navigation, use <code>cd</code>. To display the contents of a folder, use <code>ls</code>. To display the path of the current working directory, use <code>pwd</code>.</p>
 <p>For example, on macOS if you navigated to the <code>Documents</code> folder and used <code>pwd</code>, the path looks like this:</p>
-<pre class="{zsh}"><code>/Users/myusername/Documents</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/Users/myusername/Documents</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -460,19 +498,19 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Create a folder called <code>recipes</code>:</li>
 </ol>
-<pre class="{zsh}"><code>mkdir recipes</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> recipes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Navigate into the <code>recipes</code> folder:</li>
 </ol>
-<pre class="{zsh}"><code>cd recipes</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> recipes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Create a file and name it <code>recipes.txt</code>:</li>
 </ol>
-<pre class="{zsh}"><code>touch recipes.txt</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> recipes.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="4" type="1">
 <li>List the contents of the <code>recipes</code> folder:</li>
 </ol>
-<pre class="{zsh}"><code>ls</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -489,7 +527,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I added the title to <code>recipes.txt</code> by using the following command:</p>
-<pre class="{zsh}"><code>echo "My Favorite Recipes" &gt; recipes.txt</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"My Favorite Recipes"</span> <span class="op">&gt;</span> recipes.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This command writes “My Favorite Recipes” to the file, overwriting any existing content.</p>
 </div>
 </div>
@@ -506,7 +544,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre class="{zsh}"><code>touch notes.txt assignments.txt schedule.txt</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> notes.txt assignments.txt schedule.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -522,7 +560,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre class="{zsh}"><code>ls *.txt</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -541,11 +579,11 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Creating the “text_files” subfolder:</li>
 </ol>
-<pre class="{zsh}"><code>mkdir text_files</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> text_files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Moving all the <code>.txt</code> files to the “text_files” subfolder:</li>
 </ol>
-<pre class="{zsh}"><code>mv *.txt text_files</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>.txt text_files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>

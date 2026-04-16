@@ -9,7 +9,9 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.37">
 
   <title>Track, organize and share your work: An introduction to Git for research – Session 6: Integration with GitHub / GitLab</title>
@@ -33,8 +35,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-1b7d2c2bd1ee676b5edff01ca2218772.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-3da55e4bce9fb696ec08762b031f6615.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -157,32 +225,31 @@ Course at Max Planck Institute for Human Development<br>
 <nav role="doc-toc"> 
 <h2 id="toc-title">Agenda</h2>
 <ul>
-<li><a href="#/last-session-first-steps-with-git-git-essentials" id="/toc-last-session-first-steps-with-git-git-essentials"><span class="header-section-number">1</span> Last session: First steps with Git &amp; Git Essentials</a></li>
+<li><a href="#/last-session-branches" id="/toc-last-session-branches"><span class="header-section-number">1</span> Last session: Branches</a></li>
 <li><a href="#/this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d" id="/toc-this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d"><span class="header-section-number">2</span> This session: Integration with GitHub / GitLab</a></li>
 <li><a href="#/appendix" id="/toc-appendix"><span class="header-section-number">3</span> Appendix</a></li>
 </ul>
 </nav>
 </section>
 <section>
-<section id="last-session-first-steps-with-git-git-essentials" class="title-slide slide level1 center" data-number="1">
-<h1><span class="header-section-number">1</span> Last session: First steps with Git &amp; Git Essentials</h1>
+<section id="last-session-branches" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Last session: Branches</h1>
 
 </section>
-<section id="last-session-first-steps-with-git-git-essentials-1" class="slide level2">
-<h2>Last session: First steps with Git &amp; Git Essentials</h2>
+<section id="last-session-branches-1" class="slide level2">
+<h2>Last session: Branches</h2>
 <p>After the last session, you should now be able to answer the following questions / do the following:</p>
-<p><span class="emoji" data-emoji="bulb">💡</span> You can initialize a Git repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You can check the status of a Git repository.<br> <span class="emoji" data-emoji="bulb">💡</span> You understand the difference between the staging area and a commit.<br> <span class="emoji" data-emoji="bulb">💡</span> You can stage and commit changes.<br> <span class="emoji" data-emoji="bulb">💡</span> You understand the difference between a commit message and a description.</p>
-<p><span class="emoji" data-emoji="bulb">💡</span> You know what good commits look like.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to explore the commit history.<br> <span class="emoji" data-emoji="bulb">💡</span> You can compare different commits.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to use and create a <code>.gitignore</code> file.<br> <span class="emoji" data-emoji="bulb">💡</span> You can discuss which files can (not) be tracked well with Git and why.<br> <span class="emoji" data-emoji="bulb">💡</span> You know how to track empty folders in Git repositories.</p>
+<p><span class="emoji" data-emoji="bulb">💡</span> You understand the purpose and benefits of using branches in Git.<br> <span class="emoji" data-emoji="bulb">💡</span> You can create and switch between branches.<br> <span class="emoji" data-emoji="bulb">💡</span> You can merge branches and resolve merge conflicts.<br> <span class="emoji" data-emoji="bulb">💡</span> You can name at least three best practices when working with branches.</p>
 </section>
 <section id="last-session-cheatsheet" class="slide level2">
 <h2>Last session: Cheatsheet</h2>
-<h3 id="first-steps-with-git">First steps with Git</h3>
-<div id="ab8cd0d8" class="cell" data-execution_count="1">
+<h3 id="branches">Branches</h3>
+<div id="d54ad2bf" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
 <table class="caption-top">
 <colgroup>
-<col style="width: 38%">
-<col style="width: 61%">
+<col style="width: 31%">
+<col style="width: 68%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -192,58 +259,48 @@ Course at Max Planck Institute for Human Development<br>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>git init</code></td>
-<td style="text-align: left;">Initializes a folder as a Git repository</td>
+<td style="text-align: left;"><code>git branch</code></td>
+<td style="text-align: left;">Lists / creates and deletes branches</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>git status</code></td>
-<td style="text-align: left;">Shows Git tracking status of files in the repository</td>
+<td style="text-align: left;"><code>git branch feature</code></td>
+<td style="text-align: left;">Creates the <code>feature</code> branch</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>git add</code></td>
-<td style="text-align: left;">Adds file(s) to the staging area</td>
+<td style="text-align: left;"><code>git branch -d feature</code></td>
+<td style="text-align: left;">Deletes the <code>feature</code> branch</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>git commit</code></td>
-<td style="text-align: left;">Commits staged files</td>
+<td style="text-align: left;"><code>git switch</code></td>
+<td style="text-align: left;">Switches between branches</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>git commit -m "commit message"</code></td>
-<td style="text-align: left;">Commits staged files with a commit message</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="last-session-cheatsheet-1" class="slide level2">
-<h2>Last session: Cheatsheet</h2>
-<h3 id="git-essentials">Git essentials</h3>
-<div id="8004b948" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
-<table class="caption-top">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 83%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>git log</code></td>
-<td style="text-align: left;">Views past commits</td>
+<td style="text-align: left;"><code>git switch feature</code></td>
+<td style="text-align: left;">Switches to the <code>feature</code> branch</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>git diff</code></td>
-<td style="text-align: left;">Views made changes compared to the last commit</td>
+<td style="text-align: left;"><code>git checkout</code></td>
+<td style="text-align: left;">Switches between branches</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>git mv</code></td>
-<td style="text-align: left;">Renames or moves files and automatically stages the changes</td>
+<td style="text-align: left;"><code>git checkout -b feature</code></td>
+<td style="text-align: left;">Creates and switches to the <code>feature</code> branch</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git merge</code></td>
+<td style="text-align: left;">Merges branches</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git merge feature</code></td>
+<td style="text-align: left;">Merges the <code>feature</code> branch into the current branch</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git merge --abort</code></td>
+<td style="text-align: left;">Aborts a merge</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git merge --squash</code></td>
+<td style="text-align: left;">Squaches commits on branch into a single commit and merge</td>
 </tr>
 </tbody>
 </table>
@@ -252,117 +309,12 @@ Course at Max Planck Institute for Human Development<br>
 </section>
 <section id="last-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220636f757273652e70726f6a656374203e7d7d-project" class="slide level2 scrollable">
 <h2>Last session: <code>recipes</code> project</h2>
-<h3 id="first-steps-with-git-1">First steps with Git</h3>
 <p>At the end of this session, you should have accomplished the following:</p>
 <ol type="1">
-<li>You set up Git.</li>
-<li>You initialized your <code>recipes</code> folder as a Git repository.</li>
-<li>You committed your first file to the <code>recipes</code> repository.</li>
+<li>You created a new branch and merged changes into your default branch (<code>main</code> or <code>master</code>).</li>
+<li>You created and resolved a merge conflict.</li>
 </ol>
 <p>Please keep the <code>recipes</code> folder! We will continue to use it in the following sessions.</p>
-<h3 id="git-essentials-1">Git Essentials</h3>
-<p>At the end of this session, you should have accomplished the following:</p>
-<ol type="1">
-<li>Commit at least three changes in <code>recipes.txt</code>.</li>
-<li>Make at least one commit using <code>git commit --amend</code>.
-<ul>
-<li>For example, add a a new entry without a title first, commit, then add a title and use <code>git commit --amend</code> to add the title change to the same commit.</li>
-</ul></li>
-<li>Create a <code>.gitignore</code> file.
-<ul>
-<li>Everyone: Create a random file that you want to ignore, for example <code>image.jpg</code>.</li>
-<li>All macOS users: Let your repository ignore <code>.DS_Store</code>.</li>
-</ul></li>
-<li><span class="emoji" data-emoji="rocket">🚀</span> Optional: Commit <code>.gitkeep</code> in an otherwise empty directory.</li>
-</ol>
-<p>Please keep the <code>recipes</code> folder! We will continue to use it in the following sessions.</p>
-</section>
-<section id="common-questions-from-last-session" class="slide level2">
-<h2>Common questions from last session</h2>
-<div class="fragment">
-<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d7175657374696f6e203e7d7d-how-can-i-make-changes-in-a-text-.txt-file"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> <em>“How can I make changes in a text (<code>.txt</code>) file?”</em></h4>
-<ul>
-<li>Remember: <strong>It’s just a regular text file on your computer.</strong></li>
-<li>Option 1: Use a regular text editor (e.g., TextEdit on macOS, Notepad++ on Windows, or others).</li>
-<li>Option 2: Use <code>vim</code> directly from the command line (see chapter / session on “Setup”).</li>
-<li>Option 3: Use command line commands like <code>echo "My text" &gt;&gt; recipes.txt</code>.</li>
-</ul>
-</div>
-<div class="fragment">
-<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d7175657374696f6e203e7d7d-i-ran-git-commit-but-nothing-happened"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> <em>“I ran <code>git commit</code> but nothing happened?”</em></h4>
-<ul>
-<li>Maybe you forgot to run <code>git add</code> before?</li>
-</ul>
-</div>
-<div class="fragment">
-<h4 id="b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636972636c652d6578636c616d6174696f6e203e7d7d-remember-to-cd-into-your-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220636f757273652e70726f6a656374203e7d7d-project-folder"><i class="fa-solid fa-circle-exclamation" aria-label="circle-exclamation"></i> <em>“Remember to <code>cd</code> into your <code>recipes</code> project folder!”</em></h4>
-<ul>
-<li>Every time you open the command line, it starts at a default location (likely your home directory).</li>
-<li>Check in which folder you are, using <code>pwd</code> (“print working directory”).</li>
-<li>Use <code>cd</code> to move to your <code>recipes</code> project folder before you start running the Git commands.</li>
-</ul>
-</div>
-</section>
-<section id="important-note-git-repository-in-user-folder" class="slide level2">
-<h2>Important note: Git repository in <code>/user</code> folder?</h2>
-<div class="fragment">
-<ul>
-<li>Please make sure that your <code>recipes</code> folder is in a suitable place (for example, in the <code>Desktop</code>, <code>Documents</code> folders or where you keep your course-related files, …) and <strong>not</strong> in your user directory!</li>
-<li>You can check your current working directory by running <code>pwd</code> in your <code>recipes</code> folder.</li>
-<li>Also: Always remember to <code>cd</code> into your repository before you execute Git commands!</li>
-<li>If your <code>recipes</code> folder is in your user directory, please <strong>tell us</strong> and we can fix it.</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>Tip:</strong> To prevent ever creating a Git repository inside your <code>user</code> folder, you can use:</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><code>{zsh filename="Code"} touch ~/.git</code></p>
-</div></div>
-</div>
-<div class="fragment">
-<p>Running <code>git init</code> in the <code>user</code> directory now results in a (desired) error:</p>
-<div class="column" style="width:40%;">
-<p><code>{zsh filename="Output"} fatal: invalid gitfile format: /Users/user/.git</code></p>
-</div><p>Thanks to <a href="https://social.coop/@eamon/112434377857903339">Eamon Caddigan</a> for the idea!</p>
-</div>
-</section>
-<section id="staging-and-committing" class="slide level2">
-<h2>Staging and Committing</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h3 id="staging">Staging:</h3>
-<ul>
-<li>Command: <code>git add</code></li>
-<li>Purpose: Preparing and organizing files before they are recorded in the repository’s history.</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h3 id="committing">Committing:</h3>
-<ul>
-<li>Command: <code>git commit -m "commit message"</code></li>
-<li>Purpose: Saving the changes in the staged files to the repository’s history, creating a snapshot.</li>
-</ul>
-</div></div>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../images/git-staging-diagram.png" style="width:100.0%"></p>
-<figcaption>Source: <a href="https://git-scm.com/book/en/v2">git-scm.com</a></figcaption>
-</figure>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="../../images/git-analogy-letter.png" style="width:100.0%"></p>
-<figcaption>Source: <a href="https://docs.google.com/presentation/d/1Yj59XAAJZQprO-kfDHzHMtjJDttMFAqkkslqcSIRZKg/edit#slide=id.p">Heidi Seibold</a></figcaption>
-</figure>
-</div>
-</div>
-</div></div>
 </section></section>
 <section>
 <section id="this-session-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206d6574612073657373696f6e2d7469746c65203e7d7d" class="title-slide slide level1 center" data-number="2">
@@ -436,8 +388,8 @@ Course at Max Planck Institute for Human Development<br>
 </section>
 <section id="cheatsheet" class="slide level2">
 <h2>Cheatsheet</h2>
-<div id="c35e2d73" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
+<div id="b599560c" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
 <table class="caption-top">
 <colgroup>
 <col style="width: 13%">
@@ -502,9 +454,9 @@ Course at Max Planck Institute for Human Development<br>
 <div class="fragment">
 <h3 id="private-collaboration-on-default-branch-main-or-master">Private collaboration on default branch (<code>main</code> or <code>master</code>)</h3>
 <ol type="1">
-<li>Add your exercise partner as a collaborator to your project repository on GitHub.</li>
+<li>Add your exercise partner as a collaborator to your <code>recipes</code> repository on GitHub.</li>
 <li>Clone your partner’s repository.</li>
-<li>Add a new change to your collaborator’s project file (if you are unsure, where to add the entry, ask your collaborator!)</li>
+<li>Add a new recipe to your collaborator’s <code>recipes.txt</code> (if you are unsure where to add it, ask your collaborator!).</li>
 <li>Add and commit the changes.</li>
 <li>Push the changes to the remote repository.</li>
 <li>Pull your partner’s changes into your repository.</li>
@@ -517,10 +469,10 @@ Course at Max Planck Institute for Human Development<br>
 <div class="fragment">
 <h3 id="private-collaboration-with-pull-requests-using-github-flow">Private collaboration with pull requests (using GitHub Flow)</h3>
 <ol type="1">
-<li>Add your exercise partner as a collaborator to your project repository on GitHub.</li>
-<li>Clone your partner’s repository.</li>
+<li>If not done already, add your exercise partner as a collaborator to your <code>recipes</code> repository on GitHub.</li>
+<li>Clone your partner’s repository (if not already cloned).</li>
 <li>Create a new branch in your collaborator’s repository.</li>
-<li>Add a new entry to your collaborator’s project file (e.g., <code>.txt</code> or <code>.qmd</code> (if you are unsure, where to add the entry, ask your collaborator!)</li>
+<li>Add a new recipe to your collaborator’s <code>recipes.txt</code> (if you are unsure where to add it, ask your collaborator!).</li>
 <li>Add and commit the changes.</li>
 <li>Push the changes on the new branch to the remote repository.</li>
 <li>Create a Pull Request (on GitLab: Merge Request).</li>
@@ -538,9 +490,9 @@ Course at Max Planck Institute for Human Development<br>
 <ol type="1">
 <li>Move to a location on your computer where you want to clone a repository.</li>
 <li>Clone your remote repository to a <em>different location</em> on your computer.</li>
-<li>Stage and commit changes in the new location (consider using a new branch).</li>
-<li>Push these new changes to GitHub.</li>
-<li>Pull the changes to the repository in the original location.</li>
+<li>Create a new branch and add a recipe to <code>recipes.txt</code> in the cloned repository.</li>
+<li>Commit the changes and push them to GitHub.</li>
+<li>Pull the changes into the repository at the original location.</li>
 <li>Delete your newly cloned repository.</li>
 </ol>
 </div>
@@ -551,27 +503,77 @@ Course at Max Planck Institute for Human Development<br>
 <h3 id="add-a-readme.md">Add a <code>README.md</code></h3>
 <ol type="1">
 <li>Find the option to create a new file on your remote repository in the browser.</li>
-<li>Name the file <code>README.md</code>, add a brief description, and provide a commit message.</li>
+<li>Name the file <code>README.md</code>, add a brief description of your recipes repository (e.g., what kind of recipes it contains and who it belongs to), and provide a commit message.</li>
 <li><span class="emoji" data-emoji="rocket">🚀</span> Optional: Play around with <a href="https://www.markdownguide.org/">Markdown</a> syntax.</li>
 <li>Save the <code>README.md</code> file to the repository.</li>
 <li>Pull the changes to your local repository.</li>
 </ol>
 </div>
 </section>
-<section id="solutions" class="slide level2">
+<section id="solutions" class="slide level2 scrollable">
 <h2>Solutions</h2>
 <h3 id="connect-to-remote-repositories-using-ssh-1">Connect to remote repositories using SSH</h3>
-<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-ssh.sh</code> 1. In the command line, create a new SSH key. Make sure to change the example email to your email address. Optionally, provide a passphrase. 1. Copy the SSH key to your clipboard. Here, we use <code>cat</code> to print the contents of the SSH key to the command line. Copy the contents displayed in the Terminal to your clipboard. 1. Add the SSH key to your remote repository account.</p>
+<div id="8439c4ee" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode numberSource code-annotation-code number-lines code-with-copy"><code class="sourceCode"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a>ssh-keygen -t ed25519 -C "your_email@example.com"</span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cat ~/.ssh/id_ed25519.pub</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a># Copy the SSh key to your account</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol type="1">
+<li>In the command line, create a new SSH key. Make sure to change the example email to your email address. Optionally, provide a passphrase.</li>
+<li>Copy the SSH key to your clipboard. Here, we use <code>cat</code> to print the contents of the SSH key to the command line. Copy the contents displayed in the Terminal to your clipboard.</li>
+<li>Add the SSH key to your remote repository account.</li>
+</ol>
 </section>
-<section id="solutions-1" class="slide level2">
+<section id="solutions-1" class="slide level2 scrollable">
 <h2>Solutions</h2>
 <h3 id="upload-your-local-repository-to-a-remote-repository-1">Upload your local repository to a remote repository</h3>
-<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-push.sh</code> 1. To create an empty repository on GitHub: (1) Go to GitHub and click the <code>+</code> icon in the upper-right corner, then select <code>New repository</code>. (2) Name your repository. (3) Do not select <code>Initialize this repository with a README</code>. (4) Click <code>Create repository</code>. 1. Optional: Navigate into the project repository using <code>cd</code> (or a similar path). 1. Set the remote URL of the local repository to the repository using <code>git remote add origin &lt;URL&gt;</code>. Remember to use the correct <code>&lt;URL&gt;</code> depending on whether you authentication method (typically SSH or PAT). 1. Push the changes on the default branch (here, <code>main</code>) to the remote repository using <code>git push -u origin main</code>.</p>
+<div id="c3a060cb" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode numberSource code-annotation-code number-lines code-with-copy"><code class="sourceCode"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a># create an empty remote repository</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>cd my-project</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>git remote add origin https://github.com/your-username/your-repo-name.git</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a>git push -u origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol type="1">
+<li>To create an empty repository on GitHub: (1) Go to GitHub and click the <code>+</code> icon in the upper-right corner, then select <code>New repository</code>. (2) Name your repository. (3) Do not select <code>Initialize this repository with a README</code>. (4) Click <code>Create repository</code>.</li>
+<li>Optional: Navigate into the project repository using <code>cd</code> (or a similar path).</li>
+<li>Set the remote URL of the local repository to the repository using <code>git remote add origin &lt;URL&gt;</code>. Remember to use the correct <code>&lt;URL&gt;</code> depending on whether you authentication method (typically SSH or PAT).</li>
+<li>Push the changes on the default branch (here, <code>main</code>) to the remote repository using <code>git push -u origin main</code>.</li>
+</ol>
 </section>
-<section id="solutions-2" class="slide level2">
+<section id="solutions-2" class="slide level2 scrollable">
 <h2>Solutions</h2>
 <h3 id="private-collaboration-with-pull-requests-using-github-flow-1">“Private” collaboration with pull requests (using GitHub Flow)</h3>
-<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-collaboration.sh</code> 1. Add your exercise partner as a collaborator to your <code>recipes</code> repository: (1) Go to your repository on GitHub. (2) Click on <code>Settings</code>. (2) Click on <code>Manage access</code> in the left sidebar. (3) Click <code>Invite a collaborator</code> and enter your partner’s GitHub username. 1. Move to the location on your computer where you would like to clone your partner’s repository into, using <code>cd</code> in the command line. Here, we <code>cd</code> into the user’s home directory (<code>~</code>). 1. Clone your partner’s repository using <code>git clone</code>. Make sure that you <em>not</em> cloning into an existing repository. 1. Create a new branch in your partner’s repository. 1. Add a recipe to your partner’s <code>recipes.txt</code> file. 1. Add and commit the changes using a descriptive commit message. 1. Push the changes on the new branch to GitHub. 1. Create a Pull Request: (1) Go to your partner’s repository on GitHub. (2) Click <code>Compare &amp; pull request</code> for your branch. (3) Provide a title and description, then click <code>Create pull request</code>. 1. Review the PR your partner made in your repository: (19) Go to your repository on GitHub. (2) Click on the <code>Pull requests</code> tab. (3) Click on the PR made by your partner. (4) Review the changes and provide feedback. 1. Merge the PR into your repository: (1) After reviewing, click the green <code>Merge pull request</code> button. (2) Click <code>Confirm merge</code>.</p>
+<div id="62e30c04" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3"><pre class="sourceCode numberSource code-annotation-code number-lines code-with-copy"><code class="sourceCode"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a># Add your exercise partner as a collaborator to your recipes repository</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>cd ~</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>git clone https://github.com/partner-username/partner-repo-name.git</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>git checkout -b new-branch-name</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a>echo "New Recipe" &gt;&gt; recipes.txt</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>git add recipes.txt</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>git commit -m "Add new recipe to recipes.txt"</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>git push origin new-branch-name</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a># Create a Pull / Merge Request.</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a># Review the PR your partner made in your repository.</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11"></a># Merge the PR into your repository.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol type="1">
+<li>Add your exercise partner as a collaborator to your <code>recipes</code> repository: (1) Go to your repository on GitHub. (2) Click on <code>Settings</code>. (2) Click on <code>Manage access</code> in the left sidebar. (3) Click <code>Invite a collaborator</code> and enter your partner’s GitHub username.</li>
+<li>Move to the location on your computer where you would like to clone your partner’s repository into, using <code>cd</code> in the command line. Here, we <code>cd</code> into the user’s home directory (<code>~</code>).</li>
+<li>Clone your partner’s repository using <code>git clone</code>. Make sure that you <em>not</em> cloning into an existing repository.</li>
+<li>Create a new branch in your partner’s repository.</li>
+<li>Add a recipe to your partner’s <code>recipes.txt</code> file.</li>
+<li>Add and commit the changes using a descriptive commit message.</li>
+<li>Push the changes on the new branch to GitHub.</li>
+<li>Create a Pull Request: (1) Go to your partner’s repository on GitHub. (2) Click <code>Compare &amp; pull request</code> for your branch. (3) Provide a title and description, then click <code>Create pull request</code>.</li>
+<li>Review the PR your partner made in your repository: (1) Go to your repository on GitHub. (2) Click on the <code>Pull requests</code> tab. (3) Click on the PR made by your partner. (4) Review the changes and provide feedback.</li>
+<li>Merge the PR into your repository: (1) After reviewing, click the green <code>Merge pull request</code> button. (2) Click <code>Confirm merge</code>.</li>
+</ol>
 </section>
 <section id="solutions-3" class="slide level2 scrollable">
 <h2>Solutions</h2>
@@ -584,15 +586,92 @@ Course at Max Planck Institute for Human Development<br>
 <li>Use <code>git pull origin main</code> to pull the changes to your local repository.</li>
 </ol>
 </section>
-<section id="solutions-4" class="slide level2">
+<section id="solutions-4" class="slide level2 scrollable">
 <h2>Solutions</h2>
 <h3 id="clone-and-sync-your-repository-1">Clone and sync your repository</h3>
-<p><code>{zsh, filename="Code"} #| eval: false #| file: sessions/git-remotes/code/code-exercises-remotes-clone.sh</code> 1. Move to the location on your computer where you would like to clone your own repository into, using <code>cd</code> in the command line. 1. Clone your repository from GitHub to a different location on your computer. 1. Stage and commit changes in the new location (consider using a new branch). 1. Push the new changes to GitHub. 1. Fetch these new changes to the repository in the original location. 1. Delete your newly cloned repository.</p>
+<div id="1fbb6872" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode numberSource code-annotation-code number-lines code-with-copy"><code class="sourceCode"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>cd /new/location/for/repo</span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>git clone https://github.com/your-username/your-repo-name.git /new/location/for/repo</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>git checkout -b new-branch</span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>echo "New Recipe" &gt;&gt; recipes.txt</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>git add recipes.txt</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>git commit -m "Add new recipe to recipes.txt"</span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>git push -u origin new-branch</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>cd /original/location/for/repo</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>git fetch</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>git switch new-branch</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a>rm -rf /new/location/for/repo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ol type="1">
+<li>Move to the location on your computer where you would like to clone your own repository into, using <code>cd</code> in the command line.</li>
+<li>Clone your repository from GitHub to a different location on your computer.</li>
+<li>Stage and commit changes in the new location (consider using a new branch).</li>
+<li>Push the new changes to GitHub.</li>
+<li>Fetch these new changes to the repository in the original location.</li>
+<li>Delete your newly cloned repository.</li>
+</ol>
 </section></section>
 <section>
 <section id="appendix" class="title-slide slide level1 center" data-number="3">
 <h1><span class="header-section-number">3</span> Appendix</h1>
 
+</section>
+<section id="how-does-ssh-work-the-key-and-padlock-analogy" class="slide level2">
+<h2>How does SSH work? The key and padlock analogy</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="fig-ssh-key-public-private" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-ssh-key-public-private-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="../../images/ssh-key-public-private.png" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ssh-key-public-private-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: “Understanding public key private key concepts” by <a href="https://blakesmith.me/">Blake Smith</a> (License: Unknown; <a href="https://blakesmith.me/2010/02/08/understanding-public-key-private-key-concepts.html">Source on GitHub</a>)
+</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>When you set up SSH, you generate a <strong>key pair</strong>: the <em>private key</em> stays on your device, while the <em>public key</em> is copied to the servers you want access to.</li>
+<li>Think of your <strong>public key as a padlock</strong>. You can make lots of copies of this padlock and distribute them to different places - servers, computers, or anything you want to secure (just like sharing a padlock to secure different lockers). These places install your padlock, but no one can open it because they don’t have your key.</li>
+<li>Your <strong>private key is the actual key</strong> that opens those padlocks. You keep it safe and never share it. As long as your key stays secure, it doesn’t matter how many padlocks you’ve distributed.</li>
+<li>When you try to connect to a server, SSH checks if the padlock (public key) on that server matches your key. If they match, the door opens.</li>
+</ul>
+</div></div>
+</section>
+<section id="warning-the-authenticity-of-host-cant-be-established" class="slide level2">
+<h2>Warning: “The authenticity of host can’t be established”</h2>
+<div class="fragment">
+<p><strong>TL;DR</strong>: Enter <code>yes</code> and hit Enter.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p>The following message might appear when connecting to GitHub for the first time via SSH:</p>
+<pre><code>The authenticity of host 'github.com (140.82.121.3)' can't be established.
+ECDSA key fingerprint is SHA256:nThbg6GUVB7ZdnZ3iXYvgIhXZOL7NXqb7A4s9F8XY7w.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<p>This message indicates that your system is trying to connect to a remote server (i.e., GitHub) over SSH for the first time, but it doesn’t yet trust the server’s identity.</p>
+<p>If you are trusting the server’s identity, enter <code>yes</code> and hit <kbd title="Enter" aria-hidden="true">Enter</kbd><span class="visually-hidden">Enter</span>. This will result in the following message:</p>
+<pre><code>Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.</code></pre>
+<p>This message indicates that the GitHub server’s public key has been added to your <code>~/.ssh/known_hosts</code> file permanently, so you won’t be prompted with this warning the next time you connect to GitHub over SSH.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>After a successful push, you will get a message like this:</p>
+<pre><code>Enumerating objects: 17, done.
+Counting objects: 100% (17/17), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (12/12), 2.11 KiB | 2.11 MiB/s, done.
+Total 12 (delta 9), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (9/9), completed with 5 local objects.
+To https://github.com/username/repository.git
+   fb3efef..8f50685  main -&gt; main</code></pre>
+</div>
+</div></div>
 </section>
 <section id="cloning" class="slide level2">
 <h2>Cloning</h2>

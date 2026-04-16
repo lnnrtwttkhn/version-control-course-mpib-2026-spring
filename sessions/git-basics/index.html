@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>First steps with Git &amp; Git Essentials – Track, organize and share your work: An introduction to Git for research</title>
+<title>Git Essentials – Track, organize and share your work: An introduction to Git for research</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -100,6 +100,14 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"><i class="fa-solid fa-clipboard-list" aria-label="clipboard-list"></i> Schedule</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../sessions/index.html"> 
+<span class="menu-text"><i class="fa-solid fa-list-ol" aria-label="list-ol"></i> Sessions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises.html"> 
+<span class="menu-text"><i class="fa-solid fa-table-list" aria-label="table-list"></i> Exercises</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../code-of-conduct.html"> 
 <span class="menu-text"><i class="fa-solid fa-handshake" aria-label="handshake"></i> Code of Conduct</span></a>
   </li>  
@@ -149,7 +157,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#cheatsheet" id="toc-cheatsheet" class="nav-link" data-scroll-target="#cheatsheet">Cheatsheet</a>
   <ul>
   <li><a href="#first-steps-with-git-1" id="toc-first-steps-with-git-1" class="nav-link" data-scroll-target="#first-steps-with-git-1">First steps with Git</a></li>
-  <li><a href="#git-essentials-1" id="toc-git-essentials-1" class="nav-link" data-scroll-target="#git-essentials-1">Git Essentials</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -165,8 +172,8 @@ ul.task-list li input[type="checkbox"] {
     <div class="entity-contents">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">First steps with Git &amp; Git Essentials</h1>
-<p class="subtitle lead">Session 04</p>
+<h1 class="title">Git Essentials</h1>
+<p class="subtitle lead">Session 4</p>
 </div>
 <div class="quarto-title-meta column-page-left">
     <div>
@@ -200,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="this-session">This session</h2>
 <p>In this session, you will work on the following tasks:</p>
 <ol type="1">
-<li><i class="fa-solid fa-book-open" aria-label="book-open"></i> <strong>Reading</strong>: Read the chapter(s) <a href="https://lennartwittkuhn.com/version-control-book/chapters/first-steps-git.html">“First steps with Git”</a> and <a href="https://lennartwittkuhn.com/version-control-book/chapters/git-essentials.html">“Git Essentials”</a> in the Version Control Book.</li>
+<li><i class="fa-solid fa-book-open" aria-label="book-open"></i> <strong>Reading</strong>: Read the chapter(s) <strong>?meta:chapter</strong> in the Version Control Book.</li>
 <li><i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> <strong>Implementation</strong>: Try out the commands in the chapter.</li>
 <li><i class="fa-solid fa-list-check" aria-label="list-check"></i> <strong>Exercises</strong>: Work on the <a href="#exercises">exercises</a> for the <a href="#recipes-project"><code>recipes</code> project</a>.</li>
 </ol>
@@ -261,36 +268,36 @@ ul.task-list li input[type="checkbox"] {
 <section id="add-content-and-commit-changes" class="level3">
 <h3 data-anchor-id="add-content-and-commit-changes">Add content and commit changes</h3>
 <ol start="3" type="1">
-<li>Create a new text file and name it appropriately.</li>
-<li>Add a <em>short</em> entry to the text file (any favorite or an intriguing AI-generated one).</li>
-<li>Stage the new file.</li>
-<li>Commit the changes in the text file with a descriptive commit message.</li>
+<li>Open <code>recipes.txt</code> (created in the command-line session) in a text editor.</li>
+<li>Add a <em>short</em> recipe entry (a title and a short list of ingredients — use any favorite or an intriguing AI-generated one).</li>
+<li>Stage the file.</li>
+<li>Commit the changes with a descriptive commit message.</li>
 </ol>
-<p><span class="emoji" data-emoji="rocket">🚀</span> Optional: Commit at least three additional changes in your new file.</p>
+<p><span class="emoji" data-emoji="rocket">🚀</span> Optional: Commit at least three additional recipe entries in <code>recipes.txt</code>.</p>
 </section>
 <section id="amend-a-commit" class="level3">
 <h3 data-anchor-id="amend-a-commit">Amend a commit</h3>
 <ol type="1">
-<li>If needed, navigate to the project folder using the command line.</li>
-<li>Make additional changes to your project text file.</li>
-<li>Stage the changes.</li>
-<li>Amend the previous commit to include the new changes.</li>
+<li>If needed, navigate to the project repository using the command line.</li>
+<li>Add a new recipe to <code>recipes.txt</code> without a title, and commit the change.</li>
+<li>Now add a title to the recipe.</li>
+<li>Stage the change.</li>
+<li>Amend the previous commit to include the title change (without altering the commit message).</li>
 <li>Check the commit history to verify that the last commit message has not changed.</li>
 </ol>
-<p>For example, add a new entry without a title first, commit, then add a title and amend the previous commit to add the title change to the same commit.</p>
 </section>
 <section id="create-a-.gitignore-file" class="level3">
 <h3 data-anchor-id="create-a-.gitignore-file">Create a <code>.gitignore</code> file</h3>
 <ol type="1">
-<li>If needed, navigate to the project folder using the command line.</li>
-<li>Add a random file to your repository that you want to ignore, for example an image file like <code>image.jpg</code>.</li>
+<li>If needed, navigate to the project repository using the command line.</li>
+<li>Add a file to your repository that you want to ignore, for example an image file like <code>image.jpg</code>.</li>
 <li>Check the state of your repository to confirm that Git noticed the added file.</li>
 <li>Create a <code>.gitignore</code> file.</li>
-<li>Add the random file to the <code>.gitignore</code> file.</li>
+<li>Add a pattern to the <code>.gitignore</code> file to ignore the file.</li>
 <li>Check the state of your repository again to confirm that Git now ignores the added file.</li>
 <li>Stage the changes in your repository.</li>
 <li>Commit the <code>.gitignore</code> file using a descriptive commit message.</li>
-<li><span class="emoji" data-emoji="rocket">🚀</span> All macOS users: Let your repository ignore <code>.DS_Store</code>.</li>
+<li><span class="emoji" data-emoji="rocket">🚀</span> All macOS users: Also let your repository ignore <code>.DS_Store</code>.</li>
 </ol>
 </section>
 </section>
@@ -320,8 +327,6 @@ ul.task-list li input[type="checkbox"] {
 <li>Click <strong>Save</strong>.</li>
 </ol>
 <p>Note: This feature has been confirmed to work in <a href="https://google.com/chrome">Google Chrome</a>, <a href="https://www.chromium.org/Home">Chromium</a> as well as in <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>.</p>
-<p>Here’s what the Chrome print dialog would look like with these settings enabled:</p>
-<p><img src="../images/print-to-pdf.png" class="border img-fluid" alt="Screenshot of Chrome print dialog with the first slide/page of 43 shown on the left, and print options on the right. The Destination print option has Save as PDF selected."></p>
 <p>These instructions were copied from the <a href="https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf">Quarto documentation</a> (<a href="https://opensource.org/license/mit/">MIT License</a>) and slightly modified.</p>
 </div>
 </div>
@@ -331,7 +336,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-anchor-id="cheatsheet">Cheatsheet</h2>
 <section id="first-steps-with-git-1" class="level3">
 <h3 data-anchor-id="first-steps-with-git-1">First steps with Git</h3>
-<div id="bf65793e" class="cell" data-execution_count="1">
+<div id="350a3869" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -369,10 +374,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-</section>
-<section id="git-essentials-1" class="level3">
-<h3 data-anchor-id="git-essentials-1">Git Essentials</h3>
-<div id="bd93d98e" class="cell" data-execution_count="2">
+<div id="939c1b54" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
